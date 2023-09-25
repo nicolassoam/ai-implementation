@@ -1,14 +1,70 @@
 public class Rules {
-    private Rule[] rules;
 
-    public Rules() {
-        rules = new Rule[6];
-        rules[0] = new R1();
-        rules[1] = new R2();
-        rules[2] = new R3();
-        rules[3] = new R4();
-        rules[4] = new R5();
-        rules[5] = new R6();
+    public Bucket[] R1(Bucket[] buckets, int from, int to) {
+        Bucket[] _Buckets = buckets;
+        _Buckets[0].setAmount(5);
+        _Buckets[0].setLimit(5);
+        _Buckets[1].setAmount(buckets[1].getAmount());
+        _Buckets[1].setLimit(buckets[1].getLimit());
+        return _Buckets;
+    }
+
+    public Bucket[] R2(Bucket[] buckets, int from, int to) {
+        Bucket[] _Buckets = buckets;
+        _Buckets[1].setAmount(3);
+        _Buckets[1].setLimit(3);
+        _Buckets[0].setAmount(buckets[0].getAmount());
+        _Buckets[0].setLimit(buckets[0].getLimit());
+        return _Buckets;
+    }
+    
+    public Bucket[] R3(Bucket[] buckets, int from, int to) {
+        Bucket[] _Buckets = buckets;
+        _Buckets[0].setAmount(0);
+        _Buckets[0].setLimit(5);
+        _Buckets[1].setAmount(buckets[1].getAmount());
+        _Buckets[1].setLimit(buckets[1].getLimit());
+        return _Buckets;
+    }
+
+
+    public Bucket[] R4(Bucket[] buckets, int from, int to) {
+        Bucket[] _Buckets = buckets;
+        _Buckets[1].setAmount(0);
+        _Buckets[1].setLimit(3);
+        _Buckets[0].setAmount(buckets[0].getAmount());
+        _Buckets[0].setLimit(buckets[0].getLimit());
+        return _Buckets;
+    }
+
+    public Bucket[] R5(Bucket[] buckets, int from, int to) {
+        Bucket[] _Buckets = buckets;
+        _Buckets[0].setAmount(buckets[0].getAmount());
+        _Buckets[0].setLimit(buckets[0].getLimit());
+        _Buckets[1].setAmount(buckets[1].getAmount());
+        _Buckets[1].setLimit(buckets[1].getLimit());
+        int amount = _Buckets[0].getAmount() + _Buckets[1].getAmount();
+        if(_Buckets[0].getAmount() + _Buckets[1].getAmount() > _Buckets[0].getLimit()) {
+            _Buckets[0].setAmount(5);
+            _Buckets[1].setAmount(amount - _Buckets[0].getLimit());
+        }
+        else {
+            _Buckets[0].setAmount(amount);
+            _Buckets[1].setAmount(0);
+        }
+        return _Buckets;
+    }
+
+    public Bucket[] R6(Bucket[] buckets, int from, int to) {
+        Bucket[] _Buckets = buckets;
+        _Buckets[0].setAmount(buckets[0].getAmount());
+        _Buckets[0].setLimit(buckets[0].getLimit());
+        _Buckets[1].setAmount(buckets[1].getAmount());
+        _Buckets[1].setLimit(buckets[1].getLimit());
+        int maxAmount = _Buckets[1].getLimit() - _Buckets[1].getAmount();
+        _Buckets[1].setAmount(maxAmount + _Buckets[1].getAmount());
+        _Buckets[0].setAmount(_Buckets[0].getAmount() - maxAmount);
+        return _Buckets;
     }
 
     /**
@@ -17,10 +73,22 @@ public class Rules {
      * @return
      */
     public Bucket[] applyRule(Bucket[] buckets, int index) {
-        if(!rules[index - 1].verifyRule(buckets, index, index)) {
-            return null;
+        switch(index) {
+            case 1:
+                return this.R1(buckets, index, index);
+            case 2:
+                return this.R2(buckets, index, index);
+            case 3:
+                return this.R3(buckets, index, index);
+            case 4:
+                return this.R4(buckets, index, index);
+            case 5:
+                return this.R5(buckets, index, index);
+            case 6:
+                return this.R6(buckets, index, index);
+            
+            default:
+                return null;
         }
-
-        return rules[index-1].applyRule(buckets, index, index);
     }
 }
