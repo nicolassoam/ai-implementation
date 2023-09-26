@@ -1,22 +1,18 @@
-
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
         System.out.println("Iniciando execução");
-        Bucket[] buckets = new Bucket[2];
-        buckets[0] = new Bucket(5, 0);
-        buckets[1] = new Bucket(3, 0);
-        Rules rule = new Rules();
-        rule.applyRule(buckets, 1);
+        List<Integer> strategy = new ArrayList<Integer>();
 
-        for(int i = 0; i < 2; i++) {
-            System.out.println(buckets[i]);
+        for (int i = 1; i <= 6; i++) {
+            strategy.add(i);
+            // System.out.println("Estratégia " + i);
         }
 
-        rule.applyRule(buckets, 2);
+        DepthSearch depthSearch = new DepthSearch(strategy);
+        depthSearch.DFS();
 
-        for(int i = 0; i < 2; i++) {
-            System.out.println(buckets[i]);
-        }
     }    
 }
