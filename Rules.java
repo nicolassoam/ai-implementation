@@ -1,6 +1,7 @@
 public class Rules {
 
     public Bucket[] R1(Bucket[] buckets, int from, int to) {
+        if(buckets[0].getAmount() == 5) return null;
         Bucket[] _Buckets = buckets;
         _Buckets[0].setAmount(5);
         _Buckets[0].setLimit(5);
@@ -10,6 +11,7 @@ public class Rules {
     }
 
     public Bucket[] R2(Bucket[] buckets, int from, int to) {
+        if(buckets[1].getAmount() == 3) return null;
         Bucket[] _Buckets = buckets;
         _Buckets[1].setAmount(3);
         _Buckets[1].setLimit(3);
@@ -19,6 +21,7 @@ public class Rules {
     }
     
     public Bucket[] R3(Bucket[] buckets, int from, int to) {
+        if(buckets[0].getAmount() == 0) return null;
         Bucket[] _Buckets = buckets;
         _Buckets[0].setAmount(0);
         _Buckets[0].setLimit(5);
@@ -29,6 +32,7 @@ public class Rules {
 
 
     public Bucket[] R4(Bucket[] buckets, int from, int to) {
+        if(buckets[1].getAmount() == 0) return null;
         Bucket[] _Buckets = buckets;
         _Buckets[1].setAmount(0);
         _Buckets[1].setLimit(3);
@@ -38,6 +42,8 @@ public class Rules {
     }
 
     public Bucket[] R5(Bucket[] buckets, int from, int to) {
+        if(buckets[1].getAmount() == 0) return null;
+        if(buckets[0].getAmount() == 5) return null;
         Bucket[] _Buckets = buckets;
         _Buckets[0].setAmount(buckets[0].getAmount());
         _Buckets[0].setLimit(buckets[0].getLimit());
@@ -56,6 +62,8 @@ public class Rules {
     }
 
     public Bucket[] R6(Bucket[] buckets, int from, int to) {
+        if(buckets[1].getAmount() == 3) return null;
+        if(buckets[0].getAmount() == 0) return null;
         Bucket[] _Buckets = buckets;
         _Buckets[0].setAmount(buckets[0].getAmount());
         _Buckets[0].setLimit(buckets[0].getLimit());
