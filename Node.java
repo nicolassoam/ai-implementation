@@ -7,12 +7,16 @@ public class Node {
     private Bucket[] buckets;
     private int id;
 
-    public Node(int id) {
+    public Node() {
         childrens = new ArrayList<Node>();
         buckets = new Bucket[2];
         buckets[0] = new Bucket(5, 0);
         buckets[1] = new Bucket(3, 0);
+    }
+
+    public void setId(int id){
         this.id = id;
+        return;
     }
 
     public List<Node> getChildrens() {

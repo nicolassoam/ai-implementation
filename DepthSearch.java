@@ -11,12 +11,14 @@ public class DepthSearch {
     private Rules rules;
 
     public DepthSearch(Deque<Integer> strategy) {
-        this.root = new Node(pointer);
+        this.root = new Node();
+        
         this.openStack = new Stack<Node>();
         this.closedStack = new Stack<Node>();
         // this.visited = new HashSet<Node>();
         this.pointer = 0;
         this.strategy = strategy;
+        this.root.setId(pointer);
         this.openStack.push(root);
         this.rules = new Rules();
     }
@@ -30,9 +32,9 @@ public class DepthSearch {
 
                 if(aux_ != null) {
 
-                    this.pointer = this.pointer + 1;
                     
-                    Node aux = new Node(pointer);
+                    
+                    Node aux = new Node();
 
                     aux.setBuckets(aux_);
 
@@ -45,6 +47,8 @@ public class DepthSearch {
                         }
                     }
                     if(flag) continue;
+                    this.pointer = this.pointer + 1;
+                    aux.setId(this.pointer);
                     node.getChildrens().add(aux);
                     this.openStack.push(aux);
                 }
