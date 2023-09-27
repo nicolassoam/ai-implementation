@@ -1,10 +1,4 @@
-import java.util.Map;
-import java.util.List;
-import java.util.HashMap;
-import java.util.ArrayList;
 import java.util.Stack;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Deque;
 
 public class DepthSearch {
@@ -60,6 +54,17 @@ public class DepthSearch {
         
     }
 
+    @SuppressWarnings("unused")
+    private void printSolution(Node node){
+        if(node.getChildrens().size() == 0) return;
+        System.out.println(node);
+
+        for (Node n : node.getChildrens()) {
+            printSolution(n);
+        }
+    }
+
+    @SuppressWarnings("unused")
     private Boolean validateRule(Bucket[] buckets, int index){
         buckets = this.rules.applyRule(buckets, index);
         if(buckets == null) return false;
