@@ -16,7 +16,7 @@ public class DepthSearch {
         this.openStack = new Stack<Node>();
         this.closedStack = new Stack<Node>();
         // this.visited = new HashSet<Node>();
-        this.pointer = 0;
+        this.pointer = 1;
         this.strategy = strategy;
         this.root.setId(pointer);
         this.openStack.push(root);
@@ -46,9 +46,14 @@ public class DepthSearch {
                             break;
                         }
                     }
+                    
+
                     if(flag) continue;
+
                     this.pointer = this.pointer + 1;
+
                     aux.setId(this.pointer);
+
                     node.getChildrens().add(aux);
                     this.openStack.push(aux);
                 }
