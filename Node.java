@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class Node {
     private List<Node> childrens;
     private Bucket[] buckets;
@@ -14,6 +15,18 @@ public class Node {
 
     public List<Node> getChildrens() {
         return childrens;
+    }
+
+    public Bucket[] copyBuckets(){
+        Bucket[] _Buckets = new Bucket[2];
+        
+        _Buckets[0] = new Bucket(5, 0);
+        _Buckets[0].setAmount(buckets[0].getAmount());
+        _Buckets[0].setLimit(buckets[0].getLimit());
+        _Buckets[1] = new Bucket(3, 0);
+        _Buckets[1].setAmount(buckets[1].getAmount());
+        _Buckets[1].setLimit(buckets[1].getLimit());
+        return _Buckets;
     }
 
     public void setBuckets(Bucket[] buckets) {
