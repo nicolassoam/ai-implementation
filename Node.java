@@ -5,12 +5,14 @@ import java.util.List;
 public class Node {
     private List<Node> childrens;
     private Bucket[] buckets;
+    private int id;
 
-    public Node() {
+    public Node(int id) {
         childrens = new ArrayList<Node>();
         buckets = new Bucket[2];
         buckets[0] = new Bucket(5, 0);
         buckets[1] = new Bucket(3, 0);
+        this.id = id;
     }
 
     public List<Node> getChildrens() {
@@ -35,7 +37,7 @@ public class Node {
 
     @Override
     public String toString() {
-        return "Node {buckets=" + buckets[0].getAmount() + " " + buckets[1].getAmount() + "}";
+        return "Node {id = " +this.id +" buckets = " + buckets[0].getAmount() + " " + buckets[1].getAmount() + "}";
     }
 
     public void setChildrens(List<Node> childrens) {
