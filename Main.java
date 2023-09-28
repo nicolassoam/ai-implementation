@@ -10,9 +10,10 @@ public class Main {
             strategy.push(i);
             // System.out.println("Estratégia " + i);
         }
-
+        double start = System.currentTimeMillis();
         DepthSearch depthSearch = new DepthSearch(strategy);
         depthSearch.DFS();
-
+        double end = System.currentTimeMillis();
+        System.out.println("Tempo de execução: " + (end - start) + "ms");
     }    
 }
