@@ -10,6 +10,9 @@ public class DepthSearch {
     private int pointer;
     private Rules rules;
 
+    /*
+     * @param strategy: Estratégia de busca
+     */
     public DepthSearch(Deque<Integer> strategy) {
         this.root = new Node();
         
@@ -31,9 +34,6 @@ public class DepthSearch {
                 Bucket[] aux_ = this.rules.applyRule(node.copyBuckets(), s);
 
                 if(aux_ != null) {
-
-                    
-                    
                     Node aux = new Node();
 
                     aux.setBuckets(aux_);
@@ -47,7 +47,6 @@ public class DepthSearch {
                         }
                     }
                     
-
                     if(flag) continue;
 
                     this.pointer = this.pointer + 1;
@@ -55,6 +54,7 @@ public class DepthSearch {
                     aux.setId(this.pointer);
 
                     node.getChildrens().add(aux);
+
                     this.openStack.push(aux);
                 }
             }
@@ -64,6 +64,7 @@ public class DepthSearch {
                 System.out.println("Solução encontrada");
                 break;
             }
+
             this.closedStack.push(node);
         }
 
