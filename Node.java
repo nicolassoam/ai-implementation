@@ -35,7 +35,7 @@ public class Node {
 
     @Override
     public String toString() {
-        return "Node {id = " +this.id +" buckets = " + buckets[0].getAmount() + " " + buckets[1].getAmount() + "}" + " " + "heuristic = " + heuristic;
+        return "Node {id = " +this.id +", buckets = " + buckets[0].getAmount() + " " + buckets[1].getAmount() + ", heuristic = " + heuristic+"}";
     }
 
     public Bucket[] copyBuckets(){

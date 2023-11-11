@@ -1,17 +1,19 @@
-import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.Deque;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.PriorityQueue;
-import java.util.Stack;
+
 
 public class GreedySearch {
     private Node root;
     private List<Edge> edges;
     private Rules rules;
     private PriorityQueue<Node> openList;
-    private List<Node> closedList;
+    private Map<Integer,Node> closedList;
     private Deque<Integer> strategy;
 
     private double heuristic(int cost){
@@ -23,7 +25,7 @@ public class GreedySearch {
         this.edges = new ArrayList<Edge>();
         this.rules = new Rules();
         this.openList = new PriorityQueue<Node>(Comparator.comparing(Node::getHeuristic));
-        this.closedList = new ArrayList<Node>();
+        this.closedList = new HashMap<>();
         root.setHeuristic(heuristic(root.getSumBuckets()));
         this.openList.add(root);
         this.strategy = strategy;
@@ -60,6 +62,34 @@ public class GreedySearch {
         return amountChanged;
     }
 
+    private int pathToSolution(int solutionId){
+        int cost = 0;
+        Node aux = this.closedList.get(solutionId);
+        System.out.println("Caminho: ");
+        ArrayList<Integer> path = new ArrayList<>();
+        
+        while(aux.getId() != 1){
+            path.add(aux.getId());
+            for (Edge e : edges) {
+                if(e.getTargetId() == aux.getId()){
+                    cost += e.getCost();
+                    aux = this.closedList.get(e.getSourceId());
+                    
+                    // System.out.print(aux.getId() + "-> ");
+                    
+                    break;
+                }
+            }
+        }
+        path.add(1);
+        Collections.reverse(path);
+        for(int n : path){
+            System.out.print(" -> "+ n);
+        }
+        System.out.println();
+        return cost;
+    }
+
     public void greedy(){
         while(!this.openList.isEmpty()){
             Node actualState = this.openList.remove();
@@ -74,8 +104,10 @@ public class GreedySearch {
                     aux.setHeuristic(heuristic(aux.getSumBuckets()));
 
                     boolean flag = false;
-                    for (Node n : closedList) {
-                        if(n.getBuckets()[0].getAmount() == aux.getBuckets()[0].getAmount() && n.getBuckets()[1].getAmount() == aux.getBuckets()[1].getAmount()) {
+                    for(Map.Entry n : closedList.entrySet()){
+                        int key = (int) n.getKey();
+                        Node value = (Node) n.getValue();
+                        if(value.getBuckets()[0].getAmount() == aux.getBuckets()[0].getAmount() && value.getBuckets()[1].getAmount() == aux.getBuckets()[1].getAmount()){
                             aux = null;
                             flag = true;
                             break;
@@ -97,9 +129,11 @@ public class GreedySearch {
 
             if(actualState.getSumBuckets() == 4 || actualState.getSumBuckets() == 7){
                 System.out.println("Solução encontrada: " + actualState);
+                this.closedList.put(actualState.getId(), actualState);
+                System.out.println("Custo: " + pathToSolution(actualState.getId()));
                 break;
             }
-            this.closedList.add(actualState);
+            this.closedList.put(actualState.getId(), actualState);
         }
     }
 }
