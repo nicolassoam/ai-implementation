@@ -1,22 +1,19 @@
-
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 public class Main {
     public static void main(String[] args) {
         System.out.println("Iniciando execução");
-        Bucket[] buckets = new Bucket[2];
-        buckets[0] = new Bucket(5, 0);
-        buckets[1] = new Bucket(3, 0);
-        Rules rule = new Rules();
-        rule.applyRule(buckets, 1);
+        Deque<Integer> strategy = new ArrayDeque<Integer>();
 
-        for(int i = 0; i < 2; i++) {
-            System.out.println(buckets[i]);
+        for (int i = 6; i >= 1; i--) {
+            strategy.push(i);
+            // System.out.println("Estratégia " + i);
         }
-
-        rule.applyRule(buckets, 2);
-
-        for(int i = 0; i < 2; i++) {
-            System.out.println(buckets[i]);
-        }
+        double start = System.currentTimeMillis();
+        GreedySearch greedySearch = new GreedySearch(strategy);
+        greedySearch.greedy();
+        double end = System.currentTimeMillis();
+        System.out.println("Tempo de execução: " + (end - start) + "ms");
     }    
 }
