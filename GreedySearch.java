@@ -17,6 +17,8 @@ public class GreedySearch {
     private Deque<Integer> strategy;
 
     private double heuristic(int cost){
+        if(cost == 7 || cost == 4)
+            return 0;
         return Math.pow((7-cost),2) + Math.pow((4-cost), 2);
     }
 
@@ -75,8 +77,6 @@ public class GreedySearch {
                     cost += e.getCost();
                     aux = this.closedList.get(e.getSourceId());
                     
-                    // System.out.print(aux.getId() + "-> ");
-                    
                     break;
                 }
             }
@@ -104,8 +104,7 @@ public class GreedySearch {
                     aux.setHeuristic(heuristic(aux.getSumBuckets()));
 
                     boolean flag = false;
-                    for(Map.Entry n : closedList.entrySet()){
-                        int key = (int) n.getKey();
+                    for(Map.Entry<Integer,Node> n : closedList.entrySet()){
                         Node value = (Node) n.getValue();
                         if(value.getBuckets()[0].getAmount() == aux.getBuckets()[0].getAmount() && value.getBuckets()[1].getAmount() == aux.getBuckets()[1].getAmount()){
                             aux = null;
