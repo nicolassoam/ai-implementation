@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class Bucket {
     private int limit;
     private int amount;
@@ -7,6 +9,10 @@ public class Bucket {
     public Bucket(int limit, int amount) {
         this.limit = limit;
         this.amount = amount;
+    }
+
+    public Bucket() {
+        
     }
 
     @Override
@@ -33,5 +39,28 @@ public class Bucket {
     public static boolean validateRule(Bucket[] buckets, int rule) {
         
         return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(limit, amount);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Bucket bucket = (Bucket) o;
+        return limit == bucket.limit && amount == bucket.amount;
+    }
+
+    public Bucket(Bucket other) {
+        this.limit = other.limit;
+        this.amount = other.amount;
+    }
+
+    // Método de clone
+    public Bucket clone() {
+        return new Bucket(this);
     }
 }
