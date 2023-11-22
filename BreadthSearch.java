@@ -34,7 +34,6 @@ public class BreadthSearch {
                 Bucket[] aux_ = this.rules.applyRule(node.copyBuckets(), s);
 
                 if(aux_ != null) {
-                    System.out.println("Regra " + s + " pode ser aplicada");
                     Node aux = new Node();
 
                     aux.setBuckets(aux_);
