@@ -3,9 +3,28 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class Node {
+public class Node implements Comparable<Node> {
     private List<Node> childrens;
     private Bucket[] buckets;
+    private int shiftedWater = 0;
+    private Node father = null;
+
+    public Node getFather() {
+        return father;
+    }
+
+    public void setFather(Node father) {
+        this.father = father;
+    }
+
+    public int getShiftedWater() {
+        return shiftedWater;
+    }
+
+    public void setShiftedWater(int shiftedWater) {
+        this.shiftedWater = shiftedWater;
+    }
+
     public void setBuckets(Bucket[] buckets) {
         this.buckets = buckets;
     }
@@ -66,6 +85,11 @@ public class Node {
     public String getHash() {
         String result = buckets[0].getAmount() + "," + buckets[1].getAmount();
         return result;
+    }
+
+    @Override
+    public int compareTo(Node arg0) {
+        return this.shiftedWater - arg0.shiftedWater;
     }
 
 }

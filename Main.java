@@ -17,11 +17,11 @@ public class Main {
         order.add(3);
         order.add(1);
         order.add(2);
-        bk.exec(initialCondition, order);
-        Node solution = bk.getSolution();
+        Node nNode = new OrderedSearch().exec(initialCondition, order);
+        Bucket[] nBuckets = nNode.getBuckets();
         System.out.print("[");
-        System.out.print(solution.getBuckets()[0].getAmount() + ",");
-        System.out.print(solution.getBuckets()[1].getAmount());
+        System.out.print(nBuckets[0].toString());
+        System.out.print(" " + nBuckets[1].toString());
         System.out.println("]");
     }    
 }
