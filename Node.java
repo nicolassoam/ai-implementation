@@ -54,4 +54,8 @@ public class Node {
         return buckets;
     }
 
+   public int getId() {
+       return id;
+   }
+
 }

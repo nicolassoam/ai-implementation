@@ -29,10 +29,10 @@ public class DepthSearch {
     public void DFS() {
         while(!this.openStack.isEmpty()) {
             Node node = this.openStack.pop();
-
+            // System.out.println("Nó visitado: " + node.getId());
             for (int s : strategy) {
                 Bucket[] aux_ = this.rules.applyRule(node.copyBuckets(), s);
-
+                
                 if(aux_ != null) {
                     Node aux = new Node();
 
@@ -40,6 +40,16 @@ public class DepthSearch {
 
                     boolean flag = false;
                     for (Node n : closedStack) {
+                        if(n.getBuckets()[0].getAmount() == aux.getBuckets()[0].getAmount() && n.getBuckets()[1].getAmount() == aux.getBuckets()[1].getAmount()) {
+                            aux = null;
+                            flag = true;
+                            break;
+                        }
+                    }
+
+                    if(flag) continue;
+
+                    for(Node n :openStack){
                         if(n.getBuckets()[0].getAmount() == aux.getBuckets()[0].getAmount() && n.getBuckets()[1].getAmount() == aux.getBuckets()[1].getAmount()) {
                             aux = null;
                             flag = true;
