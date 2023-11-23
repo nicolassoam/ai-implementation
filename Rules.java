@@ -1,5 +1,6 @@
 public class Rules {
 
+    // Enche balde de 5 litros
     public Bucket[] R1(Bucket[] buckets, int from, int to) {
         if(buckets[0].getAmount() == 5) return null;
         Bucket[] _Buckets = buckets;
@@ -10,6 +11,7 @@ public class Rules {
         return _Buckets;
     }
 
+    // Enche balde de 3 litros
     public Bucket[] R2(Bucket[] buckets, int from, int to) {
         if(buckets[1].getAmount() == 3) return null;
         Bucket[] _Buckets = buckets;
@@ -19,7 +21,8 @@ public class Rules {
         _Buckets[0].setLimit(buckets[0].getLimit());
         return _Buckets;
     }
-    
+
+    // Esvazia balde de 5 litros
     public Bucket[] R3(Bucket[] buckets, int from, int to) {
         if(buckets[0].getAmount() == 0) return null;
         Bucket[] _Buckets = buckets;
@@ -30,7 +33,7 @@ public class Rules {
         return _Buckets;
     }
 
-
+    // Esvaiza balde de 3 litros
     public Bucket[] R4(Bucket[] buckets, int from, int to) {
         if(buckets[1].getAmount() == 0) return null;
         Bucket[] _Buckets = buckets;
@@ -41,6 +44,7 @@ public class Rules {
         return _Buckets;
     }
 
+    // Passa água do balde de 3 litros para o de 5 litros
     public Bucket[] R5(Bucket[] buckets, int from, int to) {
         if(buckets[1].getAmount() == 0) return null;
         if(buckets[0].getAmount() == 5) return null;
@@ -62,6 +66,7 @@ public class Rules {
         return _Buckets;
     }
 
+    // Passa água do balde de 5 litros para o de 3 litros
     public Bucket[] R6(Bucket[] buckets, int from, int to) {
         if(buckets[1].getAmount() == 3) return null;
         if(buckets[0].getAmount() == 0) return null;

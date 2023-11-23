@@ -11,8 +11,8 @@ public class Main {
             // System.out.println("Estratégia " + i);
         }
         double start = System.currentTimeMillis();
-        DepthSearch depthSearch = new DepthSearch(strategy);
-        depthSearch.DFS();
+        BreadthSearch breadthSearch = new BreadthSearch(strategy);
+        breadthSearch.BFS();
         double end = System.currentTimeMillis();
         System.out.println("Tempo de execução: " + (end - start) + "ms");
     }    
