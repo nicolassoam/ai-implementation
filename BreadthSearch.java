@@ -19,7 +19,7 @@ public class BreadthSearch {
 
         this.openQueue = new LinkedList<>();
         this.closedQueue = new LinkedList<>();
-        this.pointer = 1;
+        this.pointer = 0;
         this.strategy = strategy;
         this.root.setId(pointer);
         this.openQueue.add(root);
