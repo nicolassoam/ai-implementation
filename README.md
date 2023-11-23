@@ -4,4 +4,4 @@ Repositório para a implementação de buscas apresentadas na disciplina DCC 014
 - [ ] Irrevogável
 - [ ] Backtracking
 - [ ] Em largura
-- [ ] Em profundidade
+- [x] Em profundidade
