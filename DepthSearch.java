@@ -62,7 +62,8 @@ public class DepthSearch {
                     this.pointer = this.pointer + 1;
 
                     aux.setId(this.pointer);
-
+                    aux.setDepth(node.getDepth() + 1);
+                    aux.setFather(node);
                     node.getChildrens().add(aux);
 
                     this.openStack.push(aux);
@@ -72,6 +73,10 @@ public class DepthSearch {
             System.out.println(node);
             if(node.getSumBuckets() == 4 || node.getSumBuckets() == 7) {
                 System.out.println("Solução encontrada");
+                System.out.println("Profundidade: " + node.getDepth());
+                System.out.println("Caminho Solução: ");
+                printSolution(node);
+                System.out.println();
                 break;
             }
 
@@ -81,14 +86,13 @@ public class DepthSearch {
         
     }
 
-    @SuppressWarnings("unused")
     private void printSolution(Node node){
-        if(node.getChildrens().size() == 0) return;
-        System.out.println(node);
-
-        for (Node n : node.getChildrens()) {
-            printSolution(n);
+        if(node.getFather() == null) {
+            System.out.print(node.getId());
+            return;
         }
+        printSolution(node.getFather());
+        System.out.print( "->"+ node.getId());
     }
 
     @SuppressWarnings("unused")

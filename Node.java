@@ -6,12 +6,24 @@ public class Node {
     private List<Node> childrens;
     private Bucket[] buckets;
     private int id;
+    private Node father;
+    private int depth;
 
     public Node() {
         childrens = new ArrayList<Node>();
         buckets = new Bucket[2];
         buckets[0] = new Bucket(5, 0);
         buckets[1] = new Bucket(3, 0);
+        depth = 0;
+        father = null;
+    }
+
+    public void setFather(Node father) {
+        this.father = father;
+    }
+
+    public Node getFather() {
+        return father;
     }
 
     public void setId(int id){
@@ -56,6 +68,14 @@ public class Node {
 
    public int getId() {
        return id;
+   }
+
+   public void setDepth(int depth) {
+       this.depth = depth;
+   }
+
+   public int getDepth() {
+       return depth;
    }
 
 }
