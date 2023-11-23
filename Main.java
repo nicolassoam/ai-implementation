@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 public class Main {
     public static void main(String[] args) throws InterruptedException {
@@ -23,5 +25,22 @@ public class Main {
         System.out.print(solution.getBuckets()[0].getAmount() + ",");
         System.out.print(solution.getBuckets()[1].getAmount());
         System.out.println("]");
+        Deque<Integer> strategy = new ArrayDeque<Integer>();
+
+        for (int i = 1; i <= 6; i++) {
+            strategy.push(i);
+            // System.out.println("Estratégia " + i);
+        }
+        double start = System.currentTimeMillis();
+        BreadthSearch breadthSearch = new BreadthSearch(strategy);
+        breadthSearch.BFS();
+        double end = System.currentTimeMillis();
+        System.out.println("Tempo de execução: " + (end - start) + "ms");
+
+        start = System.currentTimeMillis();
+        DepthSearch depthSearch = new DepthSearch(strategy);
+        depthSearch.DFS();
+        end = System.currentTimeMillis();
+        System.out.println("Tempo de execução: " + (end - start) + "ms");
     }    
 }

@@ -1,5 +1,6 @@
 public class Rules {
 
+    // Enche balde de 5 litros
     public Bucket[] R1(Bucket[] buckets, int from, int to) {
         if(buckets[0].getAmount() == 5) return null;
         Bucket[] _Buckets = new Bucket[2];
@@ -12,6 +13,7 @@ public class Rules {
         return _Buckets;
     }
 
+    // Enche balde de 3 litros
     public Bucket[] R2(Bucket[] buckets, int from, int to) {
         if(buckets[1].getAmount() == 3) return null;
         Bucket[] _Buckets = new Bucket[2];
@@ -23,7 +25,8 @@ public class Rules {
         _Buckets[0].setLimit(buckets[0].getLimit());
         return _Buckets;
     }
-    
+
+    // Esvazia balde de 5 litros
     public Bucket[] R3(Bucket[] buckets, int from, int to) {
         if(buckets[0].getAmount() == 0) return null;
         Bucket[] _Buckets = new Bucket[2];
@@ -36,7 +39,7 @@ public class Rules {
         return _Buckets;
     }
 
-
+    // Esvaiza balde de 3 litros
     public Bucket[] R4(Bucket[] buckets, int from, int to) {
         if(buckets[1].getAmount() == 0) return null;
         Bucket[] _Buckets = new Bucket[2];
@@ -49,6 +52,7 @@ public class Rules {
         return _Buckets;
     }
 
+    // Passa água do balde de 3 litros para o de 5 litros
     public Bucket[] R5(Bucket[] buckets, int from, int to) {
         if(buckets[1].getAmount() == 0) {
             return null;
@@ -76,6 +80,7 @@ public class Rules {
         return _Buckets;
     }
 
+    // Passa água do balde de 5 litros para o de 3 litros
     public Bucket[] R6(Bucket[] buckets, int from, int to) {
         if(buckets[1].getAmount() == 3) return null;
         if(buckets[0].getAmount() == 0) return null;
@@ -86,21 +91,17 @@ public class Rules {
         _Buckets[0].setLimit(buckets[0].getLimit());
         _Buckets[1].setAmount(buckets[1].getAmount());
         _Buckets[1].setLimit(buckets[1].getLimit());
-        int maxAmount = _Buckets[1].getLimit() - _Buckets[1].getAmount();
-        //System.out.println(maxAmount);
-        if(_Buckets[0].getAmount() < maxAmount) {
-            _Buckets[1].setAmount(_Buckets[0].getAmount());
-            _Buckets[0].setAmount(0);
-            
+        
+        int amount = _Buckets[0].getAmount() + _Buckets[1].getAmount();
+        if(_Buckets[0].getAmount() + _Buckets[1].getAmount() > _Buckets[1].getLimit()) {
+            _Buckets[1].setAmount(3);
+            _Buckets[0].setAmount(amount - _Buckets[1].getLimit());
         }
         else {
-            _Buckets[1].setAmount(maxAmount + _Buckets[1].getAmount());
-            _Buckets[0].setAmount(_Buckets[0].getAmount() - maxAmount);
+            _Buckets[1].setAmount(amount);
+            _Buckets[0].setAmount(0);
         }
-        if(_Buckets[0].getAmount() < 0 || _Buckets[1].getAmount() < 0) {
-            System.out.println("Ficaria negativo");
-            return null;
-        };
+        
         return _Buckets;
     }
 
