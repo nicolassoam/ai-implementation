@@ -39,6 +39,17 @@ public class BreadthSearch {
                     aux.setBuckets(aux_);
 
                     boolean flag = false;
+
+                    for (Node n : openQueue) {
+                        if (n.getBuckets()[0].getAmount() == aux.getBuckets()[0].getAmount() && n.getBuckets()[1].getAmount() == aux.getBuckets()[1].getAmount()) {
+                            aux = null;
+                            flag = true;
+                            break;
+                        }
+                    }
+
+                    if (flag) continue;
+
                     for (Node n : closedQueue) {
                         if (n.getBuckets()[0].getAmount() == aux.getBuckets()[0].getAmount() && n.getBuckets()[1].getAmount() == aux.getBuckets()[1].getAmount()) {
                             aux = null;
@@ -52,7 +63,8 @@ public class BreadthSearch {
                     this.pointer = this.pointer + 1;
 
                     aux.setId(this.pointer);
-
+                    aux.setFather(node);
+                    aux.setDepth(node.getDepth() + 1);
                     node.getChildrens().add(aux);
 
                     this.openQueue.add(aux);
@@ -62,10 +74,23 @@ public class BreadthSearch {
             System.out.println(node);
             if(node.getSumBuckets() == 4 || node.getSumBuckets() == 7) {
                 System.out.println("Solução encontrada");
+                System.out.println("Profundidade: " + node.getDepth());
+                System.out.println("Caminho Solução: ");
+                printSolution(node);
+                System.out.println();
                 break;
             }
 
             this.closedQueue.add(node);
         }
+    }
+
+    private void printSolution(Node node){
+        if(node.getFather() == null) {
+            System.out.print(node.getId());
+            return;
+        }
+        printSolution(node.getFather());
+        System.out.print( "->"+ node.getId());
     }
 }

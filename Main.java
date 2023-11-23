@@ -15,5 +15,11 @@ public class Main {
         breadthSearch.BFS();
         double end = System.currentTimeMillis();
         System.out.println("Tempo de execução: " + (end - start) + "ms");
+
+        start = System.currentTimeMillis();
+        DepthSearch depthSearch = new DepthSearch(strategy);
+        depthSearch.DFS();
+        end = System.currentTimeMillis();
+        System.out.println("Tempo de execução: " + (end - start) + "ms");
     }    
 }
