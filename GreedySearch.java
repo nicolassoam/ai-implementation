@@ -31,7 +31,6 @@ public class GreedySearch {
         this.closedList = new HashMap<>();
         this.pointer= 1;
         root.setHeuristic(heuristic(root.getSumBuckets()));
-        root.setId(pointer);
         this.openList.add(root);
         this.strategy = strategy;
     }
@@ -102,15 +101,13 @@ public class GreedySearch {
                 int edgeCost = calculateAmountChanged(actualState.getBuckets(), i);
 
                 if(aux_ != null){
-                    Node aux = new Node();
-                    aux.setBuckets(aux_);
-                    aux.setHeuristic(heuristic(aux.getSumBuckets()));
+                    
 
                     boolean flag = false;
                     for(Map.Entry<Integer,Node> n : closedList.entrySet()){
                         Node value = (Node) n.getValue();
-                        if(value.getBuckets()[0].getAmount() == aux.getBuckets()[0].getAmount() && value.getBuckets()[1].getAmount() == aux.getBuckets()[1].getAmount()){
-                            aux = null;
+                        if(value.getBuckets()[0].getAmount() ==  aux_[0].getAmount() && value.getBuckets()[1].getAmount() ==  aux_[1].getAmount()){
+                            // aux = null;
                             flag = true;
                             break;
                         }
@@ -119,17 +116,20 @@ public class GreedySearch {
                     if(flag) continue;
 
                     for(Node n : openList){
-                        if(n.getBuckets()[0].getAmount() == aux.getBuckets()[0].getAmount() && n.getBuckets()[1].getAmount() == aux.getBuckets()[1].getAmount()){
-                            aux = null;
+                        if(n.getBuckets()[0].getAmount() == aux_[0].getAmount() && n.getBuckets()[1].getAmount() ==  aux_[1].getAmount()){
+                            // aux = null;
                             flag = true;
                             break;
                         }
                     }
 
                     if(flag) continue;
-                    pointer++;
-                    aux.setId(pointer);
+
+                    Node aux = new Node();
+                    aux.setBuckets(aux_);
+                    aux.setHeuristic(heuristic(aux.getSumBuckets()));
                     
+
                     Edge edge = new Edge(actualState.getId(), aux.getId(), edgeCost);
                     edges.add(edge);
                     

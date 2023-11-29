@@ -5,13 +5,14 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class Node {
     private List<Node> childrens;
     private Bucket[] buckets;
+    private static final AtomicInteger ids = new AtomicInteger(0);
     private int id;
     private double heuristic;
 
     public Node() {
         this.childrens = new ArrayList<Node>();
         this.buckets = new Bucket[2];
-        this.id = 0;
+        this.id = ids.incrementAndGet();
         buckets[0] = new Bucket(5, 0);
         buckets[1] = new Bucket(3, 0);
     }
@@ -51,9 +52,6 @@ public class Node {
 
     public int getId() {
         return id;
-    }
-    public void setId(int id) {
-        this.id = id;
     }
 
     public void setHeuristic(double heuristic) {
