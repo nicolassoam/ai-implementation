@@ -15,6 +15,7 @@ public class GreedySearch {
     private PriorityQueue<Node> openList;
     private Map<Integer,Node> closedList;
     private Deque<Integer> strategy;
+    private int pointer;
 
     private double heuristic(int cost){
         if(cost == 7 || cost == 4)
@@ -28,7 +29,9 @@ public class GreedySearch {
         this.rules = new Rules();
         this.openList = new PriorityQueue<Node>(Comparator.comparing(Node::getHeuristic));
         this.closedList = new HashMap<>();
+        this.pointer= 1;
         root.setHeuristic(heuristic(root.getSumBuckets()));
+        root.setId(pointer);
         this.openList.add(root);
         this.strategy = strategy;
     }
@@ -124,9 +127,13 @@ public class GreedySearch {
                     }
 
                     if(flag) continue;
-
+                    pointer++;
+                    aux.setId(pointer);
+                    
                     Edge edge = new Edge(actualState.getId(), aux.getId(), edgeCost);
                     edges.add(edge);
+                    
+                    
                     actualState.getChildrens().add(aux);
                     this.openList.add(aux);
                 }
