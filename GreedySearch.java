@@ -115,6 +115,16 @@ public class GreedySearch {
                     
                     if(flag) continue;
 
+                    for(Node n : openList){
+                        if(n.getBuckets()[0].getAmount() == aux.getBuckets()[0].getAmount() && n.getBuckets()[1].getAmount() == aux.getBuckets()[1].getAmount()){
+                            aux = null;
+                            flag = true;
+                            break;
+                        }
+                    }
+
+                    if(flag) continue;
+
                     Edge edge = new Edge(actualState.getId(), aux.getId(), edgeCost);
                     edges.add(edge);
                     actualState.getChildrens().add(aux);
