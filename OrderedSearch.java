@@ -16,7 +16,7 @@ public class OrderedSearch {
     private int getShiftedWater(Bucket[] a0, Bucket[] a2, int rule) {
         int shifted1 = Math.abs(a0[0].getAmount() - a2[0].getAmount());
         int shifted2 = Math.abs(a0[1].getAmount() - a2[1].getAmount());
-        return rule == 1 || rule == 2 ? (shifted1 + shifted2) / 2 : shifted1 + shifted2 ;
+        return rule == 5 || rule == 6 ? (shifted1 + shifted2) / 2 : shifted1 + shifted2 ;
     }
 
     public Node exec(Node initialCondition, List<Integer> rulesOrder) throws InterruptedException {
