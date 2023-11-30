@@ -25,7 +25,7 @@ public class Main {
 
         System.out.print("FINAL SOLUTION: [");
         System.out.print(nBuckets[0].toString());
-        System.out.print(" " + nBuckets[1].toString());
+        System.out.print(" | " + nBuckets[1].toString());
         System.out.println("]");
     }    
 }

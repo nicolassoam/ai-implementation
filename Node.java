@@ -10,6 +10,7 @@ public class Node implements Comparable<Node> {
     private Node father = null;
     private double heuristic;
     private double evaluation;
+    private int pathCost = 0;
 
     public Node getFather() {
         return father;
@@ -22,6 +23,10 @@ public class Node implements Comparable<Node> {
     public int getShiftedWater() {
         return shiftedWater;
     }
+
+    public void setPathCost(int pathCost) { this.pathCost = pathCost + getShiftedWater(); }
+
+    public int getPathCost() { return this.pathCost; }
 
     public void setShiftedWater(int shiftedWater) {
         this.shiftedWater = shiftedWater;
@@ -69,9 +74,9 @@ public class Node implements Comparable<Node> {
     }
 
     public void evaluate() {
-        this.evaluation = getHeuristic() + getShiftedWater();
-        System.out.println(getBuckets()[0].toString() + " " + getBuckets()[1].toString());
-        System.out.println("f(n): " + getEvaluation() + " = " + getHeuristic() + " + " + getShiftedWater());
+        this.evaluation = getHeuristic() + getPathCost();
+        System.out.println("ID " + getId() + " | " + getBuckets()[0].toString() + " | " + getBuckets()[1].toString());
+        System.out.println("f(n): " + getEvaluation() + " = " + getHeuristic() + " + " + getPathCost() + "\n");
     }
 
     @Override
@@ -105,6 +110,8 @@ public class Node implements Comparable<Node> {
         String result = buckets[0].getAmount() + "," + buckets[1].getAmount();
         return result;
     }
+
+    public int getId() { return this.id; }
 
     @Override
     public int compareTo(Node arg0) {
