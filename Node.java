@@ -41,6 +41,8 @@ public class Node implements Comparable<Node> {
             this.heuristic = Math.pow((7-sumBuckets),2) + Math.pow((4-sumBuckets), 2);
     }
     public double getHeuristic() { return this.heuristic; }
+
+    public void setHeuristic(double heuristic) { this.heuristic = heuristic; }
     public double getEvaluation() { return this.evaluation; }
 
     public void setBuckets(Bucket[] buckets) {
@@ -70,7 +72,7 @@ public class Node implements Comparable<Node> {
 
     public List<Node> getChildrens() {
         return childrens;
-    }
+    }     
 
     public Bucket[] copyBuckets(){
         Bucket[] _Buckets = new Bucket[2];
