@@ -101,8 +101,6 @@ public class GreedySearch {
                 int edgeCost = calculateAmountChanged(actualState.getBuckets(), i);
 
                 if(aux_ != null){
-                    
-
                     boolean flag = false;
                     for(Map.Entry<Integer,Node> n : closedList.entrySet()){
                         Node value = (Node) n.getValue();
@@ -132,8 +130,7 @@ public class GreedySearch {
 
                     Edge edge = new Edge(actualState.getId(), aux.getId(), edgeCost);
                     edges.add(edge);
-                    
-                    
+
                     actualState.getChildrens().add(aux);
                     this.openList.add(aux);
                 }
@@ -146,7 +143,7 @@ public class GreedySearch {
             if(actualState.getSumBuckets() == 4 || actualState.getSumBuckets() == 7){
                 System.out.println("Solução encontrada: " + actualState);
                 this.closedList.put(actualState.getId(), actualState);
-                System.out.println("Custo: " + pathToSolution(actualState.getId()));
+                //System.out.println("Custo: " + pathToSolution(actualState.getId()));
                 break;
             }
             this.closedList.put(actualState.getId(), actualState);
