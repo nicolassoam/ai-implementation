@@ -63,7 +63,7 @@ public class Main {
 
         // A* Search
         System.out.println("------------------");
-        System.out.println("Busca Ordenada");
+        System.out.println("Busca A*");
         start = System.currentTimeMillis();
         Node aNode = new AStarSearch().exec(initialCondition, strategy);
         Bucket[] aBuckets = aNode.getBuckets();
