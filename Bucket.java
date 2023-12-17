@@ -14,7 +14,7 @@ public class Bucket {
 
     @Override
     public String toString() {
-        return "Bucket{limit=" + limit + ", amount=" + amount + "}";
+        return "Bucket (" + limit + "): " + amount;
     }
 
     public int getLimit() {

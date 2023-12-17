@@ -54,7 +54,23 @@ public class Main {
         start = System.currentTimeMillis();
         Node nNode = new OrderedSearch().exec(initialCondition, strategy);
         Bucket[] nBuckets = nNode.getBuckets();
-        System.out.print("Solução encontrada!");
+        System.out.print("SOLUÇÃO FINAL: [");
+        System.out.print(nBuckets[0].toString());
+        System.out.print(" | " + nBuckets[1].toString());
+        System.out.println("]");
+        end = System.currentTimeMillis();
+        System.out.println("Tempo de execução: " + (end - start) + "ms");
+
+        // A* Search
+        System.out.println("------------------");
+        System.out.println("Busca Ordenada");
+        start = System.currentTimeMillis();
+        Node aNode = new AStarSearch().exec(initialCondition, strategy);
+        Bucket[] aBuckets = aNode.getBuckets();
+        System.out.print("SOLUÇÃO FINAL: [");
+        System.out.print(aBuckets[0].toString());
+        System.out.print(" | " + aBuckets[1].toString());
+        System.out.println("]");
         end = System.currentTimeMillis();
         System.out.println("Tempo de execução: " + (end - start) + "ms");
     }    

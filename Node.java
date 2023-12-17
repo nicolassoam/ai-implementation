@@ -8,6 +8,9 @@ public class Node implements Comparable<Node> {
     private Bucket[] buckets;
     private int shiftedWater = 0;
     private Node father = null;
+    private double heuristic;
+    private double evaluation;
+    private int pathCost = 0;
 
     public Node getFather() {
         return father;
@@ -21,9 +24,24 @@ public class Node implements Comparable<Node> {
         return shiftedWater;
     }
 
+    public void setPathCost(int pathCost) { this.pathCost = pathCost + getShiftedWater(); }
+
+    public int getPathCost() { return this.pathCost; }
+
     public void setShiftedWater(int shiftedWater) {
         this.shiftedWater = shiftedWater;
     }
+
+    public void calculateHeuristic() {
+        int sumBuckets = this.getBuckets()[0].getAmount() + this.getBuckets()[1].getAmount();
+
+        if(sumBuckets == 7 || sumBuckets == 4)
+            this.heuristic = 0;
+        else
+            this.heuristic = Math.pow((7-sumBuckets),2) + Math.pow((4-sumBuckets), 2);
+    }
+    public double getHeuristic() { return this.heuristic; }
+    public double getEvaluation() { return this.evaluation; }
 
     public void setBuckets(Bucket[] buckets) {
         this.buckets = buckets;
@@ -84,6 +102,12 @@ public class Node implements Comparable<Node> {
     public static boolean getItsSolution(Bucket[] buckets) {
         if(buckets == null) return false;
         return buckets[0].getAmount() + buckets[1].getAmount() == 4 || buckets[0].getAmount() + buckets[1].getAmount() == 7;
+    }
+
+    public void evaluate() {
+        this.evaluation = getHeuristic() + getPathCost();
+        System.out.println("ID " + getId() + " | " + getBuckets()[0].toString() + " | " + getBuckets()[1].toString());
+        System.out.println("f(n): " + getEvaluation() + " = " + getHeuristic() + " + " + getPathCost() + "\n");
     }
 
     @Override
