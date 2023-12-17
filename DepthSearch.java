@@ -82,8 +82,6 @@ public class DepthSearch {
 
             this.closedStack.push(node);
         }
-
-        
     }
 
     private void printSolution(Node node){

@@ -1,21 +1,26 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Node {
     private List<Node> childrens;
     private Bucket[] buckets;
+    private static final AtomicInteger ids = new AtomicInteger(0);
     private int id;
     private Node father;
     private int depth;
 
     public Node() {
-        childrens = new ArrayList<Node>();
-        buckets = new Bucket[2];
-        buckets[0] = new Bucket(5, 0);
-        buckets[1] = new Bucket(3, 0);
-        depth = 0;
-        father = null;
+
+        this.childrens = new ArrayList<Node>();
+        this.buckets = new Bucket[2];
+        this.buckets[0] = new Bucket(5, 0);
+        this.buckets[1] = new Bucket(3, 0);
+        this.depth = 0;
+        this.father = null;
+        this.id = ids.incrementAndGet();
+
     }
 
     public void setFather(Node father) {
@@ -64,6 +69,32 @@ public class Node {
     }
     public Bucket[] getBuckets() {
         return buckets;
+    }
+
+    public static boolean getItsSolution(Bucket[] buckets) {
+        if(buckets == null) return false;
+        return buckets[0].getAmount() + buckets[1].getAmount() == 4 || buckets[0].getAmount() + buckets[1].getAmount() == 7;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + Arrays.hashCode(buckets);
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Node other = (Node) obj;
+        return Arrays.equals(buckets, other.buckets);
+    }
+
+    public String getHash() {
+        String result = buckets[0].getAmount() + "," + buckets[1].getAmount();
+        return result;
     }
 
    public int getId() {
