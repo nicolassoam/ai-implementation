@@ -27,16 +27,12 @@ public class Main {
         Backtracking bk = new Backtracking();
         bk.exec(initialCondition, strategy);
         Node solution = bk.getSolution();
-        System.out.print("[");
-        System.out.print(solution.getBuckets()[0].getAmount() + ",");
-        System.out.print(solution.getBuckets()[1].getAmount());
-        System.out.println("]");
         end = System.currentTimeMillis();
         System.out.println("Tempo de execução: " + (end - start) + "ms");
 
         // Breadth Search
         System.out.println("------------------");
-        System.out.println("Breadth Search");
+        System.out.println("Busca em Largura");
         start = System.currentTimeMillis();
         BreadthSearch breadthSearch = new BreadthSearch(strategy);
         breadthSearch.BFS();
@@ -45,10 +41,20 @@ public class Main {
 
         // Depth Search
         System.out.println("------------------");
-        System.out.println("Depth Search");
+        System.out.println("Busca em Profundidade");
         start = System.currentTimeMillis();
         DepthSearch depthSearch = new DepthSearch(strategy);
         depthSearch.DFS();
+        end = System.currentTimeMillis();
+        System.out.println("Tempo de execução: " + (end - start) + "ms");
+
+        // Ordered Search
+        System.out.println("------------------");
+        System.out.println("Busca Ordenada");
+        start = System.currentTimeMillis();
+        Node nNode = new OrderedSearch().exec(initialCondition, strategy);
+        Bucket[] nBuckets = nNode.getBuckets();
+        System.out.print("Solução encontrada!");
         end = System.currentTimeMillis();
         System.out.println("Tempo de execução: " + (end - start) + "ms");
     }    

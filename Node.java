@@ -3,12 +3,34 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class Node {
+public class Node implements Comparable<Node> {
     private List<Node> childrens;
     private Bucket[] buckets;
+    private int shiftedWater = 0;
+    private Node father = null;
+
+    public Node getFather() {
+        return father;
+    }
+
+    public void setFather(Node father) {
+        this.father = father;
+    }
+
+    public int getShiftedWater() {
+        return shiftedWater;
+    }
+
+    public void setShiftedWater(int shiftedWater) {
+        this.shiftedWater = shiftedWater;
+    }
+
+    public void setBuckets(Bucket[] buckets) {
+        this.buckets = buckets;
+    }
+
     private static final AtomicInteger ids = new AtomicInteger(0);
     private int id;
-    private Node father;
     private int depth;
 
     public Node() {
@@ -21,14 +43,6 @@ public class Node {
         this.father = null;
         this.id = ids.incrementAndGet();
 
-    }
-
-    public void setFather(Node father) {
-        this.father = father;
-    }
-
-    public Node getFather() {
-        return father;
     }
 
     public void setId(int id){
@@ -50,10 +64,6 @@ public class Node {
         _Buckets[1].setAmount(buckets[1].getAmount());
         _Buckets[1].setLimit(buckets[1].getLimit());
         return _Buckets;
-    }
-
-    public void setBuckets(Bucket[] buckets) {
-        this.buckets = buckets;
     }
 
     @Override
@@ -109,4 +119,8 @@ public class Node {
        return depth;
    }
 
+    @Override
+    public int compareTo(Node arg0) {
+        return this.shiftedWater - arg0.shiftedWater;
+    }
 }
